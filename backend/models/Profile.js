@@ -1,282 +1,94 @@
 import mongoose from 'mongoose';
 
-// Profile schema definition
 const profileSchema = new mongoose.Schema({
-    userId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', 
-        required: true 
-    }, // Reference to User
-    
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to User
     personalInformation: {
-        gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
-        dateOfBirth: { type: Date, required: true },
-        placeOfBirth: { 
-            city: { type: String, required: true },
-            state: { type: String, required: true },
-            country: { type: String, required: true }
-        },
-        currentLocation: { 
-            city: { type: String, required: true },
-            state: { type: String, required: true },
-            country: { type: String, required: true }
-        },
-        citizenship: { 
-            type: String, 
-            enum: ['Indian Resident', 'NRI'], 
-            required: true 
-        },
-        marriageStatus: { 
-            type: String, 
-            enum: ['Never Married', 'Divorced'], 
-            required: true 
-        },
+        gender: { type: String },
+        dateOfBirth: { type: Date },
+        placeOfBirth: { city: String, state: String, country: String },
+        currentLocation: { city: String, state: String, country: String },
+        citizenship: { type: String, enum: ['Indian Resident', 'NRI'] },
+        marriageStatus: { type: String, enum: ['Never Married', 'Divorced'] },
     },
-
     physicalAttributes: {
-        height: { type: Number, required: true }, // in cm
-        weight: { type: Number, required: true }, // in kg
-        bodyType: { 
-            type: String, 
-            enum: ['Slim', 'Athletic', 'Average'], 
-            required: true 
-        },
-        bloodGroup: { 
-            type: String, 
-            required: true 
-        },
+        height: { type: Number }, // cm
+        weight: { type: Number }, // kg
+        bodyType: { type: String, enum: ['Slim', 'Athletic', 'Average'] },
+        bloodGroup: { type: String },
     },
-
     culturalDetails: {
-        caste: { type: String, required: true },
+        caste: { type: String },
         subCaste: { type: String },
         gotra: { type: String },
         nakshatra: { type: String },
         pada: { type: String },
         rashi: { type: String },
-        religionPractices: { 
-            type: String, 
-            required: true, 
-            enum: ['Observant', 'Non-Observant'] 
-        },
+        religionPractices: { type: String }, // e.g., Observant, Non-Observant
     },
-
     lifestyleAndHabits: {
-        foodHabits: { 
-            type: String, 
-            enum: ['Veg', 'Non-Veg', 'Eggetarian'], 
-            required: true 
-        },
-        drink: { 
-            type: Boolean, 
-            required: true 
-        },
-        smoke: { 
-            type: Boolean, 
-            required: true 
-        },
-        fitnessHabits: { 
-            type: String, 
-            required: true 
-        }, // e.g., Gym-Goer, Yoga Enthusiast
-        petsPreference: { 
-            type: Boolean, 
-            required: true 
-        }, // True for Yes, False for No
-        familyPreference: { 
-            type: String, 
-            enum: ['Nuclear', 'Joint'], 
-            required: true 
-        },
+        foodHabits: { type: String, enum: ['Veg', 'Non-Veg', 'Eggetarian'] },
+        drink: { type: Boolean },
+        smoke: { type: Boolean },
+        fitnessHabits: { type: String }, // e.g., Gym-Goer, Yoga Enthusiast
+        petsPreference: { type: Boolean }, // True for Yes, False for No
+        familyPreference: { type: String, enum: ['Nuclear', 'Joint'] },
     },
-
     educationalAndProfessionalDetails: {
-        education: { 
-            type: String, 
-            required: true 
-        },
-        occupation: { 
-            type: String, 
-            required: true 
-        },
-        income: { 
-            type: Number, 
-            required: true 
-        }, // Annual income
+        education: { type: String },
+        occupation: { type: String },
+        income: { type: Number }, // Annual income
     },
-
     familyDetails: {
-        fatherName: { 
-            type: String, 
-            required: true 
-        },
-        motherName: { 
-            type: String, 
-            required: true 
-        },
-        numberOfSiblings: { 
-            type: Number, 
-            required: true 
-        },
-        siblingsMarried: { 
-            type: Number, 
-            required: true 
-        },
-        familyType: { 
-            type: String, 
-            enum: ['Joint', 'Nuclear'], 
-            required: true 
-        },
-        familyIncome: { 
-            type: Number, 
-            required: true 
-        },
-        fatherAlive: { 
-            type: Boolean, 
-            required: true 
-        },
-        motherAlive: { 
-            type: Boolean, 
-            required: true 
-        },
+        fatherName: { type: String },
+        motherName: { type: String },
+        numberOfSiblings: { type: Number },
+        siblingsMarried: { type: Number },
+        familyType: { type: String, enum: ['Joint', 'Nuclear'] },
+        familyIncome: { type: Number },
+        fatherAlive: { type: Boolean },
+        motherAlive: { type: Boolean },
     },
-
     partnerPreferences: {
-        ageRange: { 
-            min: { type: Number, required: true },
-            max: { type: Number, required: true }
-        },
-        heightRange: { 
-            min: { type: Number, required: true },
-            max: { type: Number, required: true }
-        },
-        education: { 
-            type: [String], 
-            required: true 
-        }, // Array of accepted degrees
-        caste: { type: String, required: true },
-        location: { 
-            type: String, 
-            required: true 
-        }, // City or Country
-        horoscopeMatching: { 
-            type: Boolean, 
-            required: true 
-        }, // Mandatory or Optional
-        manglikStatus: { 
-            type: String, 
-            enum: ['Yes', 'No', 'Doesn’t Matter'], 
-            required: true 
-        },
+        ageRange: { min: Number, max: Number },
+        heightRange: { min: Number, max: Number },
+        education: { type: [String] }, // Array of accepted degrees
+        caste: { type: String },
+        location: { type: String }, // City or Country
+        horoscopeMatching: { type: Boolean }, // Mandatory or Optional
+        manglikStatus: { type: String, enum: ['Yes', 'No', 'Doesn’t Matter'] },
     },
-
     hobbiesAndInterests: {
-        hobbies: { 
-            type: [String], 
-            required: true 
-        },
-        partnerTraits: { 
-            type: [String], 
-            required: true 
-        }, // e.g., Introvert, Extrovert
+        hobbies: { type: [String] },
+        partnerTraits: { type: [String] }, // e.g., Introvert, Extrovert
     },
-
     astrologicalDetails: {
-        ganaMatch: { 
-            type: Boolean, 
-            required: true 
-        },
-        nakshatra: { 
-            type: String, 
-            required: true 
-        },
-        pada: { 
-            type: String, 
-            required: true 
-        },
-        rashi: { 
-            type: String, 
-            required: true 
-        },
-        manglikStatus: { 
-            type: Boolean, 
-            required: true 
-        },
-        willingToShareHoroscope: { 
-            type: Boolean, 
-            required: true 
-        },
+        ganaMatch: { type: Boolean },
+        nakshatra: { type: String },
+        pada: { type: String },
+        rashi: { type: String },
+        manglikStatus: { type: Boolean },
+        willingToShareHoroscope: { type: Boolean },
     },
-
     marriagePreferences: {
-        timeline: { 
-            type: String, 
-            enum: ['Immediate', 'Within 1 Year', 'Flexible'], 
-            required: true 
-        },
-        willingnessToRelocate: { 
-            type: String, 
-            enum: ['Yes', 'No', 'Depends on Location'], 
-            required: true 
-        },
+        timeline: { type: String, enum: ['Immediate', 'Within 1 Year', 'Flexible'] },
+        willingnessToRelocate: { type: String, enum: ['Yes', 'No', 'Depends on Location'] },
     },
-
     enhancements: {
-        aboutMe: { 
-            type: String, 
-            required: true 
-        },
-        partnerExpectations: { 
-            type: String, 
-            required: true 
-        },
-        profilePhotos: { 
-            type: [String], 
-            required: true 
-        }, // Array of URLs
+        aboutMe: { type: String },
+        partnerExpectations: { type: String },
+        profilePhotos: { type: [String] }, // Array of URLs
         socialMediaLinks: {
-            linkedIn: { 
-                type: String, 
-                required: true 
-            },
-            instagram: { 
-                type: String, 
-                required: true 
-            },
-            facebook: { 
-                type: String, 
-                required: true 
-            },
+            linkedIn: { type: String },
+            instagram: { type: String },
+            facebook: { type: String },
         },
-        healthInformation: { 
-            type: String, 
-            required: true 
-        }, // e.g., Medical Conditions
-        uploadedDocs: { 
-            type: [String], 
-            required: true 
-        }, // URLs of uploaded documents
+        healthInformation: { type: String }, // e.g., Medical Conditions
+        uploadedDocs: { type: [String] }, // URLs of uploaded documents
     },
-
-    isApproved: { 
-        type: Boolean, 
-        default: false, 
-        required: true 
-    }, // Admin approval
-
-    createdAt: { 
-        type: Date, 
-        default: Date.now 
-    },
-
-    updatedAt: { 
-        type: Date, 
-        default: Date.now 
-    },
-
+    isApproved: { type: Boolean, default: false }, // Admin approval
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
 });
 
-// Create the Profile model based on the schema
 const Profile = mongoose.model('Profile', profileSchema);
-
 export default Profile;
