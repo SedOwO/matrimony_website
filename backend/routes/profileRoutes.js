@@ -1,6 +1,6 @@
 import express from 'express';
 import {
-    createProfile,
+    completeProfile,
     getProfile,
     updateProfile,
     deleteProfile,
@@ -10,7 +10,7 @@ import protect from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 // Create or Initialize Profile
-router.post('/', protect, createProfile);
+router.post('/', protect, completeProfile);
 
 // Get Profile by User ID
 router.get('/:userId', protect, getProfile);
