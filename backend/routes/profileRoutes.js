@@ -9,7 +9,7 @@ import protect from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', protect, completeProfile);
+router.post('/complete', protect, completeProfile);
 
 router.get('/:userId', protect, getProfile);
 
