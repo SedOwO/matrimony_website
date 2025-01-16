@@ -2,23 +2,28 @@ import Profile from '../models/Profile.js';
 
 
 export const completeProfile = async (req, res) => {
-    const { userId } = req.user; // Extract userId from authenticated user
+    const { userId } = req.user; // Now 'userId' should be available from the decoded JWT
     const profileData = req.body; // Profile details sent in the request body
 
     try {
-        // Update the profile with the provided data
-        const updatedProfile = await Profile.findOneAndUpdate(
-            { userId },
-            { $set: profileData },
-            { new: true } // Return the updated document
-        );
+        // Find or create the profile based on userId
+        let updatedProfile = await Profile.findOne({ userId });
 
         if (!updatedProfile) {
-            return res.status(404).json({ message: 'Profile not found' });
+            // Create a new profile if one doesn't exist
+            updatedProfile = new Profile({ userId, ...profileData });
+            await updatedProfile.save();
+        } else {
+            // Update the existing profile with new data
+            updatedProfile = await Profile.findOneAndUpdate(
+                { userId },
+                { $set: profileData },
+                { new: true }
+            );
         }
 
         res.status(200).json({
-            message: 'Profile updated successfully',
+            message: updatedProfile ? 'Profile updated successfully' : 'Profile created successfully',
             profile: updatedProfile,
         });
     } catch (error) {
@@ -26,6 +31,7 @@ export const completeProfile = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
+
 
 
 // Get Profile
