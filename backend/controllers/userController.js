@@ -8,23 +8,19 @@ export const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
-        // Check if the user already exists
         const userExists = await User.findOne({ email });
         if (userExists) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Create the basic user
         const user = await User.create({
             name,
             email,
             password: hashedPassword,
         });
 
-        // Create an empty profile and link it to the user
         const profile = await Profile.create({
             userId: user._id, // Reference to the user
         });
