@@ -63,13 +63,3 @@ export const updateProfile = async (req, res) => {
     }
 };
 
-// Delete Profile
-export const deleteProfile = async (req, res) => {
-    try {
-        const { userId } = req.params;
-        await Profile.findOneAndDelete({ userId });
-        res.status(200).json({ message: 'Profile deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to delete profile', error });
-    }
-};

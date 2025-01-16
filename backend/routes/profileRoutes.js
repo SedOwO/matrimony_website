@@ -3,7 +3,6 @@ import {
     completeProfile,
     getProfile,
     updateProfile,
-    deleteProfile,
 } from '../controllers/profileController.js';
 import protect from '../middleware/authMiddleware.js';
 
@@ -15,6 +14,5 @@ router.get('/:userId', protect, getProfile);
 
 router.put('/:userId', protect, updateProfile);
 
-router.delete('/:userId', protect, deleteProfile);
 
 export default router;
