@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import React from 'react';
+import ProfileCompletion from './pages/Profile'; // Adjust the path if needed
 
-function App() {
+const App = () => {
   return (
-    <>
-      
-    </>
-  )
-}
+    <div className="App">
+      <ProfileCompletion />
+    </div>
+  );
+};
 
-export default App
+export default App;

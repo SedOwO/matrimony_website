@@ -1,228 +1,208 @@
 import React, { useState } from 'react';
 
 const ProfileCompletion = () => {
-  const [profileData, setProfileData] = useState({
-    name: '',
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
     gender: '',
-    dob: '',
-    nationality: '',
+    dateOfBirth: '',
     religion: '',
-    language: '',
-    education: '',
-    occupation: '',
-    city: '',
     maritalStatus: '',
-    height: '',
-    weight: '',
-    hobbies: '',
-    bio: '',
-    partnerPreferences: '',
-    isApproved: false, // Example flag
+    occupation: '',
+    education: '',
+    address: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProfileData({ ...profileData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission, for example, call an API to save data
-    console.log(profileData);
+    console.log(formData); // You can replace this with an API call to submit the data
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4">Complete Your Profile</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
+      <h2 className="text-2xl font-semibold text-center mb-6">Profile Completion</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* First and Last Name */}
+        <div className="flex space-x-4">
+          <div className="w-1/2">
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              First Name
+            </label>
             <input
               type="text"
-              name="name"
-              value={profileData.name}
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
               onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md"
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Gender</label>
-            <select
-              name="gender"
-              value={profileData.gender}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
-            <input
-              type="date"
-              name="dob"
-              value={profileData.dob}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Nationality</label>
+          <div className="w-1/2">
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+              Last Name
+            </label>
             <input
               type="text"
-              name="nationality"
-              value={profileData.nationality}
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
               onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md"
               required
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Religion</label>
-            <input
-              type="text"
-              name="religion"
-              value={profileData.religion}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Language</label>
-            <input
-              type="text"
-              name="language"
-              value={profileData.language}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Education</label>
-            <input
-              type="text"
-              name="education"
-              value={profileData.education}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Occupation</label>
-            <input
-              type="text"
-              name="occupation"
-              value={profileData.occupation}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">City</label>
-            <input
-              type="text"
-              name="city"
-              value={profileData.city}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Marital Status</label>
-            <select
-              name="maritalStatus"
-              value={profileData.maritalStatus}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            >
-              <option value="">Select Marital Status</option>
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-              <option value="Divorced">Divorced</option>
-              <option value="Widowed">Widowed</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Height</label>
-            <input
-              type="text"
-              name="height"
-              value={profileData.height}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Weight</label>
-            <input
-              type="text"
-              name="weight"
-              value={profileData.weight}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-            />
-          </div>
-        </div>
-
+        {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Hobbies</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+
+        {/* Gender Dropdown */}
+        <div>
+          <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+            Gender
+          </label>
+          <select
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        {/* Date of Birth */}
+        <div>
+          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
+            Date of Birth
+          </label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={formData.dateOfBirth}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          />
+        </div>
+
+        {/* Religion Dropdown */}
+        <div>
+          <label htmlFor="religion" className="block text-sm font-medium text-gray-700">
+            Religion
+          </label>
+          <select
+            id="religion"
+            name="religion"
+            value={formData.religion}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Religion</option>
+            <option value="hindu">Hindu</option>
+            <option value="muslim">Muslim</option>
+            <option value="christian">Christian</option>
+            <option value="sikh">Sikh</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        {/* Marital Status Dropdown */}
+        <div>
+          <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700">
+            Marital Status
+          </label>
+          <select
+            id="maritalStatus"
+            name="maritalStatus"
+            value={formData.maritalStatus}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          >
+            <option value="">Select Marital Status</option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="divorced">Divorced</option>
+            <option value="widowed">Widowed</option>
+          </select>
+        </div>
+
+        {/* Occupation */}
+        <div>
+          <label htmlFor="occupation" className="block text-sm font-medium text-gray-700">
+            Occupation
+          </label>
           <input
             type="text"
-            name="hobbies"
-            value={profileData.hobbies}
+            id="occupation"
+            name="occupation"
+            value={formData.occupation}
             onChange={handleChange}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
           />
         </div>
 
+        {/* Education */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Bio</label>
-          <textarea
-            name="bio"
-            value={profileData.bio}
+          <label htmlFor="education" className="block text-sm font-medium text-gray-700">
+            Education
+          </label>
+          <input
+            type="text"
+            id="education"
+            name="education"
+            value={formData.education}
             onChange={handleChange}
-            rows="4"
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
           />
         </div>
 
+        {/* Address */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Partner Preferences</label>
+          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            Address
+          </label>
           <textarea
-            name="partnerPreferences"
-            value={profileData.partnerPreferences}
+            id="address"
+            name="address"
+            value={formData.address}
             onChange={handleChange}
-            rows="4"
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
-          />
+            className="w-full px-4 py-2 border border-gray-300 rounded-md"
+          ></textarea>
         </div>
 
-        <div className="mt-6 flex justify-center">
+        {/* Submit Button */}
+        <div className="flex justify-center mt-6">
           <button
             type="submit"
-            className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
           >
             Save Profile
           </button>
