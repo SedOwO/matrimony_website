@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
+  const navigate = useNavigate(); // Initialize navigate hook
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,6 +33,11 @@ const Register = () => {
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         setMessage('Registration successful!');
+        
+        // Redirect to profile page after a short delay
+        setTimeout(() => {
+          navigate('/profile');
+        }, 1000);
       }
     } catch (error) {
       setError(error.response?.data?.message || 'Registration failed');
